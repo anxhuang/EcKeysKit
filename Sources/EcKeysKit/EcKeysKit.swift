@@ -374,10 +374,3 @@ extension SecKey {
         return data
     }
 }
-
-/// TODO: REMOVE
-extension Data {
-    var hexString: String {
-        reduce("", { $0 + String(format: "%02X ", $1) })
-    }
-}
