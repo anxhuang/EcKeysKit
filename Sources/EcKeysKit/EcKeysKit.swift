@@ -174,6 +174,10 @@ public extension EcPrivateKeyProtocol {
  Named Curves:
  */
 
+@available(iOS, deprecated: 14)
+@available(macOS, deprecated: 11)
+@available(tvOS, deprecated: 14.0)
+@available(watchOS, deprecated: 7.0)
 public enum P256r1 {
     /*
      secp256r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) ansi-X9-62(10045) curves(3) prime(1) 7 }
@@ -239,6 +243,10 @@ public enum P256r1 {
     }
 }
 
+@available(iOS, deprecated: 14)
+@available(macOS, deprecated: 11)
+@available(tvOS, deprecated: 14.0)
+@available(watchOS, deprecated: 7.0)
 public enum P384r1 {
     /*
      secp384r1 OBJECT IDENTIFIER ::= { iso(1) identified-organization(3) certicom(132) curve(0) 34 }
@@ -305,6 +313,10 @@ public enum P384r1 {
     }
 }
 
+@available(iOS, deprecated: 14)
+@available(macOS, deprecated: 11)
+@available(tvOS, deprecated: 14.0)
+@available(watchOS, deprecated: 7.0)
 public enum P521r1 {
     /*
      secp521r1 OBJECT IDENTIFIER ::= { iso(1) identified-organization(3) certicom(132) curve(0) 35 }
