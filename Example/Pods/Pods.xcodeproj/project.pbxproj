@@ -15,6 +15,7 @@
 		9D203CF3E1C0B493929D605830E22DA8 /* Pods-EcKeysKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F1E9387311E3D3F47EDCF5139D6A444A /* Pods-EcKeysKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A89EBE90E0F7EB0E63CAAE24385E784C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		ADB676996951ABBB434D4931F3756A99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		CE31CF582A4DE0EE0001C4EF /* EcKeysKit-Objc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31CF572A4DE0EE0001C4EF /* EcKeysKit-Objc.swift */; };
 		CED45FF22A4D32B2006C44C0 /* EcKeysKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED45FF12A4D32B2006C44C0 /* EcKeysKit.swift */; };
 		F42321526166B2FD0D449709D5FC337F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		BD9DD80F07FD8BAB13A32556A9B25518 /* Pods-EcKeysKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EcKeysKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		BE784B6CF1FE51BECDE35D20E9B6A966 /* Pods-EcKeysKit_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-EcKeysKit_Tests"; path = Pods_EcKeysKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C057EED98A4596A1B1C27A20B6361CAD /* Pods-EcKeysKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EcKeysKit_Tests.modulemap"; sourceTree = "<group>"; };
+		CE31CF572A4DE0EE0001C4EF /* EcKeysKit-Objc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EcKeysKit-Objc.swift"; sourceTree = "<group>"; };
 		CED45FF12A4D32B2006C44C0 /* EcKeysKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EcKeysKit.swift; path = Sources/EcKeysKit/EcKeysKit.swift; sourceTree = "<group>"; };
 		D17BAF3B9C041BF0B56EB8660D7AB1BF /* EcKeysKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EcKeysKit-dummy.m"; sourceTree = "<group>"; };
 		DDAE13FB01B5FEF6F0EF4633BE15C626 /* EcKeysKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EcKeysKit.debug.xcconfig; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				CED45FF12A4D32B2006C44C0 /* EcKeysKit.swift */,
+				CE31CF572A4DE0EE0001C4EF /* EcKeysKit-Objc.swift */,
 				8238B613D524F88D7995EF7F503A7701 /* Pod */,
 				68CA973EBE7E16A1415B16A54905BAF6 /* Support Files */,
 			);
@@ -372,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE31CF582A4DE0EE0001C4EF /* EcKeysKit-Objc.swift in Sources */,
 				CED45FF22A4D32B2006C44C0 /* EcKeysKit.swift in Sources */,
 				99EEFFAB810749E849372BF7669F363B /* EcKeysKit-dummy.m in Sources */,
 			);

@@ -136,7 +136,7 @@ public extension EcPrivateKeyProtocol {
         }
     }
 
-    func sharedSecret(with publicKey: EcPublicKeyProtocol) throws -> Data {
+    func sharedSecret(with publicKey: PublicKey) throws -> Data {
         var error: Unmanaged<CFError>?
         guard let secret = SecKeyCopyKeyExchangeResult(secKey, .ecdhKeyExchangeStandard, publicKey.secKey, [:] as CFDictionary, &error) as Data? else {
             throw error!.takeRetainedValue()

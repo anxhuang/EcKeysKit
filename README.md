@@ -18,14 +18,19 @@ If the iOS deployment target is aboved, you can just `import CryptoKit` and skip
 
 ## Usage
 
-### Syntax
-Type in `CryptoKit`-like with a more shorten style.
-
+### Swift
 ```swift
 let derData = Data(base64Encoded: "MFkwEwYHKoZIzj0CAQYIK...")!
 let derPublicKey = try! P256r1.EcPublicKey(der: derData)
 let newPrivateKey = P256r1.EcPrivateKey()
 let sharedSecret = try! newPrivateKey.sharedSecret(with: derPublicKey)
+```
+### Objective-C
+```smalltalk
+NSData *derData = [[NSData alloc] initWithBase64EncodedString: @"MFkwEwYHKoZIzj0CAQYIK..." options: NSDataBase64DecodingIgnoreUnknownCharacters];
+P256r1EcPublicKey *derPublicKey = [[P256r1EcPublicKey alloc] initWithDer: derData error: nil];
+P256r1EcPrivateKey *newPrivateKey = [[P256r1EcPrivateKey alloc] initWithRandom: true];
+NSData *sharedSecret = [newPrivateKey sharedSecretWith: derPublicKey error: nil];
 ```
 
 ### Supported Curves

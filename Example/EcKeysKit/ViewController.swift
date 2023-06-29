@@ -12,11 +12,11 @@ import EcKeysKit
 class ViewController: UIViewController {
     
     private let msgLabel: UILabel = {
-        let msgLabel = UILabel()
-        msgLabel.numberOfLines = 0
-        msgLabel.textAlignment = .center
-        msgLabel.textColor = .black
-        return msgLabel
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = .black
+        return label
     }()
 
     override func viewDidLoad() {
@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         
         let stackView = UIStackView(arrangedSubviews: [
+            makeButton(title: "Objective-C", color: .systemOrange, action: #selector(tapObjcButton)),
             makeButton(title: "P256r1", color: .systemRed, action: #selector(tapP256r1Button)),
             makeButton(title: "P384r1", color: .systemGreen, action: #selector(tapP384r1Button)),
             makeButton(title: "P521r1", color: .systemBlue, action: #selector(tapP521r1Button)),
@@ -52,6 +53,11 @@ class ViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.addTarget(self, action: action, for: .touchUpInside)
         return button
+    }
+    
+    @objc private func tapObjcButton() {
+        let vc = ObjcViewController()
+        present(vc, animated: true)
     }
     
     @objc private func tapP256r1Button() {
