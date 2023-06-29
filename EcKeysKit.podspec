@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'EcKeysKit'
   s.version          = '0.1.0'
-  s.summary          = 'A CryptoKit alternative for handle Elliptic Curve Diffie–Hellman Key Exchange between cross-platforms like java and swift.'
+  s.summary          = 'A CryptoKit alternative for handle Elliptic Curve Diffie-Hellman Key Exchange between cross-platforms like java and swift.'
 
   s.homepage         = 'https://github.com/anxhuang/EcKeysKit'
   
