@@ -1,0 +1,16 @@
+PODS:
+  - EcKeysKit (0.1.0)
+
+DEPENDENCIES:
+  - EcKeysKit (from `../`)
+
+EXTERNAL SOURCES:
+  EcKeysKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EcKeysKit: ce1df2a1b7a20a9d46e862fa359b82f7b47c8b88
+
+PODFILE CHECKSUM: 284fd69637b0926076f56964617e29eaf3b10574
+
+COCOAPODS: 1.11.3

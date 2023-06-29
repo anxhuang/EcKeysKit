@@ -1,0 +1,6 @@
+framework module EcKeysKit {
+  umbrella header "EcKeysKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

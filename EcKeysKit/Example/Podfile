@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'EcKeysKit_Example' do
+  pod 'EcKeysKit', :path => '../'
+
+  target 'EcKeysKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
