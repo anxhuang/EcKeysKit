@@ -1,11 +1,11 @@
 import Foundation
 
-enum EcKeyError: Error {
+public enum EcKeyError: Error {
     case parseEcPrivateKeyFailed
     case parseEcPublicKeyFailed
 }
 
-protocol EcKeyProtocol {
+public protocol EcKeyProtocol {
     static var asn1Prefix: Data { get }
     var secKey: SecKey! { get set }
     var bytes: Data! { get set }
@@ -28,17 +28,17 @@ extension EcKeyProtocol {
     }
 }
 
-protocol EcPublicKeyProtocol: EcKeyProtocol {
+public protocol EcPublicKeyProtocol: EcKeyProtocol {
     init()
     init(x963: Data) throws
     init(der: Data) throws
 }
 
-extension EcPublicKeyProtocol {
+public extension EcPublicKeyProtocol {
     var raw: Data { bytes.dropFirst() } // Drop Prefix [0x04]
     var x963: Data { bytes }
     var der: Data { Self.asn1Prefix + bytes }
-
+    
     init(x963: Data) throws {
         self.init()
         bytes = x963
@@ -48,10 +48,11 @@ extension EcPublicKeyProtocol {
     init(der: Data) throws {
         self.init()
         bytes = der.dropFirst(Self.asn1Prefix.count)
-        secKey = try x963SecKey(keyClass: kSecAttrKeyClassPublic)    }
+        secKey = try x963SecKey(keyClass: kSecAttrKeyClassPublic)
+    }
 }
 
-protocol EcPrivateKeyProtocol: EcKeyProtocol {
+public protocol EcPrivateKeyProtocol: EcKeyProtocol {
     static var asn1PrefixS1: Data { get }
     static var asn1PrefixS2: Data { get }
     associatedtype PublicKey: EcPublicKeyProtocol
@@ -63,7 +64,7 @@ protocol EcPrivateKeyProtocol: EcKeyProtocol {
     init(derWithPub: Data) throws
 }
 
-extension EcPrivateKeyProtocol {
+public extension EcPrivateKeyProtocol {
     var raw: Data { bytes }
     var x963: Data { publicKey.bytes + bytes }
     var der: Data { Self.asn1Prefix + bytes }
@@ -173,14 +174,14 @@ extension EcPrivateKeyProtocol {
  Named Curves:
  */
 
-enum P256r1 {
+public enum P256r1 {
     /*
      secp256r1 OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840) ansi-X9-62(10045) curves(3) prime(1) 7 }
      */
-    struct EcPublicKey: EcPublicKeyProtocol {
-        var secKey: SecKey!
-        var bytes: Data!
-        static let asn1Prefix = Data([
+    public struct EcPublicKey: EcPublicKeyProtocol {
+        public var secKey: SecKey!
+        public var bytes: Data!
+        public static let asn1Prefix = Data([
             0x30, 0x59, // SEQUENCE[89]
             0x30, 0x13, // SEQUENCE[19]
             0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x02, 0x01, // OID[7]: 1.2.840.10045.2.1
@@ -188,14 +189,16 @@ enum P256r1 {
             0x03, 0x42, // BITSTRING[66]
             0x00 // EOC
         ])
+        
+        public init() {}
     }
 
-    struct EcPrivateKey: EcPrivateKeyProtocol {
-        var secKey: SecKey!
-        var bytes: Data!
-        var publicKey: P256r1.EcPublicKey!
+    public struct EcPrivateKey: EcPrivateKeyProtocol {
+        public var secKey: SecKey!
+        public var bytes: Data!
+        public var publicKey: P256r1.EcPublicKey!
 
-        init(random: Bool = true) {
+        public init(random: Bool = true) {
             if random {
                 self = try! Self(x963: try! Self.randomSecKey(size: 256).data)
             }
@@ -203,7 +206,7 @@ enum P256r1 {
         /* JAVA 8 secp256r1:
          3041 020100 3013 06072A8648CE3D0201 06082A8648CE3D030107 0427 3025 020101 0420 [PRI-32 Bytes]
          */
-        static let asn1Prefix = Data([
+        public static let asn1Prefix = Data([
             0x30, 0x41, // SEQUENCE[65]
             0x02, 0x01, 0x00, // INTEGER[1]: 0
             0x30, 0x13, // SEQUENCE[19]
@@ -217,7 +220,7 @@ enum P256r1 {
         /* iOS 14 secp256r1:
          308187 020100 3013 06072A8648CE3D0201 06082A8648CE3D030107 046D 306B 020101 0420 [PRI-32 Bytes] A144 0342 00 [PUB-65 Bytes]
          */
-        static let asn1PrefixS1 = Data([
+        public static let asn1PrefixS1 = Data([
             0x30, 0x81, 0x87, // SEQUENCE[LONG(1): 135]
             0x02, 0x01, 0x00, // INTEGER[1]: 0
             0x30, 0x13, // SEQUENCE[19]
@@ -228,7 +231,7 @@ enum P256r1 {
             0x02, 0x01, 0x01, // INTEGER[1]: 1
             0x04, 0x20 // OCTETSTRING[32]
         ])
-        static let asn1PrefixS2 = Data([
+        public static let asn1PrefixS2 = Data([
             0xA1, 0x44, // CONTEXT SPECIFIC(1)[68]
             0x03, 0x42, // BITSTRING[66]
             0x00 // EOC
@@ -236,14 +239,14 @@ enum P256r1 {
     }
 }
 
-enum P384r1 {
+public enum P384r1 {
     /*
      secp384r1 OBJECT IDENTIFIER ::= { iso(1) identified-organization(3) certicom(132) curve(0) 34 }
      */
-    struct EcPublicKey: EcPublicKeyProtocol {
-        var secKey: SecKey!
-        var bytes: Data!
-        static let asn1Prefix = Data([
+    public struct EcPublicKey: EcPublicKeyProtocol {
+        public var secKey: SecKey!
+        public var bytes: Data!
+        public static let asn1Prefix = Data([
             0x30, 0x76, // SEQUENCE[118]
             0x30, 0x10, // SEQUENCE[16]
             0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x02, 0x01, // OID[7]: 1.2.840.10045.2.1
@@ -251,14 +254,16 @@ enum P384r1 {
             0x03, 0x62, // BITSTRING[98]
             0x00 // EOC
         ])
+        
+        public init() {}
     }
 
-    struct EcPrivateKey: EcPrivateKeyProtocol {
-        var secKey: SecKey!
-        var bytes: Data!
-        var publicKey: P384r1.EcPublicKey!
+    public struct EcPrivateKey: EcPrivateKeyProtocol {
+        public var secKey: SecKey!
+        public var bytes: Data!
+        public var publicKey: P384r1.EcPublicKey!
 
-        init(random: Bool = true) {
+        public init(random: Bool = true) {
             if random {
                 self = try! Self(x963: try! Self.randomSecKey(size: 384).data)
             }
@@ -266,7 +271,7 @@ enum P384r1 {
         /* JAVA 8 secp384r1:
          304E 020100 3010 06072A8648CE3D0201 06052B81040022 0437 3035 020101 0430 [PRI-48 Bytes]
          */
-        static let asn1Prefix = Data([
+        public static let asn1Prefix = Data([
             0x30, 0x4E, // SEQUENCE[78]
             0x02, 0x01, 0x00, // INTEGER[1]: 0
             0x30, 0x10, // SEQUENCE[16]
@@ -280,7 +285,7 @@ enum P384r1 {
         /* iOS 14 secp384r1:
          3081B6 020100 3010 06072A8648CE3D0201 06052B81040022 04819E 30819B 020101 0430 [PRI-48 Bytes] A1640362 00 [PUB-97 Bytes]
          */
-        static let asn1PrefixS1 = Data([
+        public static let asn1PrefixS1 = Data([
             0x30, 0x81, 0xB6, // SEQUENCE[LONG(1): 182]
             0x02, 0x01, 0x00, // INTEGER[1]: 0
             0x30, 0x10, // SEQUENCE[16]
@@ -291,7 +296,7 @@ enum P384r1 {
             0x02, 0x01, 0x01, // INTEGER[1]: 1
             0x04, 0x30 // OCTETSTRING[48]
         ])
-        static let asn1PrefixS2 = Data([
+        public static let asn1PrefixS2 = Data([
             0xA1, 0x64, // CONTEXT SPECIFIC(1)[100]
             0x03, 0x62, // BITSTRING[98]
             0x00 // EOC
@@ -300,14 +305,14 @@ enum P384r1 {
     }
 }
 
-enum P521r1 {
+public enum P521r1 {
     /*
      secp521r1 OBJECT IDENTIFIER ::= { iso(1) identified-organization(3) certicom(132) curve(0) 35 }
      */
-    struct EcPublicKey: EcPublicKeyProtocol {
-        var secKey: SecKey!
-        var bytes: Data!
-        static let asn1Prefix = Data([
+    public struct EcPublicKey: EcPublicKeyProtocol {
+        public var secKey: SecKey!
+        public var bytes: Data!
+        public static let asn1Prefix = Data([
             0x30, 0x81, 0x9B, // SEQUENCE[LONG(1): 155]
             0x30, 0x10, // SEQUENCE[16]
             0x06, 0x07, 0x2A, 0x86, 0x48, 0xCE, 0x3D, 0x02, 0x01, // OID[7]: 1.2.840.10045.2.1
@@ -315,14 +320,16 @@ enum P521r1 {
             0x03, 0x81, 0x86, // BITSTRING[LONG(1): 134]
             0x00 // EOC
         ])
+        
+        public init() {}
     }
 
-    struct EcPrivateKey: EcPrivateKeyProtocol {
-        var secKey: SecKey!
-        var bytes: Data!
-        var publicKey: P521r1.EcPublicKey!
+    public struct EcPrivateKey: EcPrivateKeyProtocol {
+        public var secKey: SecKey!
+        public var bytes: Data!
+        public var publicKey: P521r1.EcPublicKey!
 
-        init(random: Bool = true) {
+        public init(random: Bool = true) {
             if random {
                 self = try! Self(x963: try! Self.randomSecKey(size: 521).data)
             }
@@ -332,7 +339,7 @@ enum P521r1 {
         305F 020100 3010 06072A8648CE3D0201 06052B81040023 0448 3046 020101 0441 [PRI-65 Bytes]
         305E 020100 3010 06072A8648CE3D0201 06052B81040023 0447 3045 020101 0440 [PRI-64 Bytes]
         */
-        static let asn1Prefix = Data([
+        public static let asn1Prefix = Data([
             0x30, 0x60, // SEQUENCE[96]
             0x02, 0x01, 0x00, // INTEGER[1]: 0
             0x30, 0x10, // SEQUENCE[16]
@@ -346,7 +353,7 @@ enum P521r1 {
         /* iOS 14 secp521r1:
          3081EE 020100 3010 06072A8648CE3D0201 06052B81040023 0481D6 3081D3 020101 0442 [PRI-66 Bytes] A18189 038186 00 [PUB-133 Bytes]
          */
-        static let asn1PrefixS1 = Data([
+        public static let asn1PrefixS1 = Data([
             0x30, 0x81, 0xEE, // SEQUENCE[LONG(1): 238]
             0x02, 0x01, 0x00, // INTEGER[1]: 0
             0x30, 0x10, // SEQUENCE[16]
@@ -357,7 +364,7 @@ enum P521r1 {
             0x02, 0x01, 0x01, // INTEGER[1]: 1
             0x04, 0x42 // OCTETSTRING[66]
         ])
-        static let asn1PrefixS2 = Data([
+        public static let asn1PrefixS2 = Data([
             0xA1, 0x81, 0x89, // CONTEXT SPECIFIC(1)[LONG(1): 137]
             0x03, 0x81, 0x86, // BITSTRING[134]
             0x00 // EOC
