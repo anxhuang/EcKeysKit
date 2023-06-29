@@ -103,6 +103,21 @@ public extension EcPrivateKeyProtocol {
         }
         secKey = try x963SecKey(keyClass: kSecAttrKeyClassPrivate)
     }
+    
+    fileprivate init(size: Int) throws {
+        let attr: [CFString: Any] = [
+            kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
+            kSecAttrKeySizeInBits: size,
+            kSecAttrKeyClass: kSecAttrKeyClassPrivate
+        ]
+        var error: Unmanaged<CFError>?
+        guard let key = SecKeyCreateRandomKey(attr as CFDictionary, &error),
+              let data = SecKeyCopyExternalRepresentation(key, &error) as Data? else {
+            throw error!.takeRetainedValue()
+        }
+        try self.init(x963: data)
+    }
+
 
     private func parseBytes(der: Data) throws -> Data {
         if let range = der.firstRange(of: [0x02, 0x01, 0x01, 0x04]),
@@ -119,19 +134,6 @@ public extension EcPrivateKeyProtocol {
         } else {
             throw EcKeyError.parseEcPrivateKeyFailed
         }
-    }
-
-    fileprivate static func randomSecKey(size: Int) throws -> SecKey {
-        let attr: [CFString: Any] = [
-            kSecAttrKeyType: kSecAttrKeyTypeECSECPrimeRandom,
-            kSecAttrKeySizeInBits: size,
-            kSecAttrKeyClass: kSecAttrKeyClassPrivate
-        ]
-        var error: Unmanaged<CFError>?
-        guard let key = SecKeyCreateRandomKey(attr as CFDictionary, &error) else {
-            throw error!.takeRetainedValue()
-        }
-        return key
     }
 
     func sharedSecret(with publicKey: EcPublicKeyProtocol) throws -> Data {
@@ -204,7 +206,7 @@ public enum P256r1 {
 
         public init(random: Bool = true) {
             if random {
-                self = try! Self(x963: try! Self.randomSecKey(size: 256).data)
+                self = try! Self(size: 256)
             }
         }
         /* JAVA 8 secp256r1:
@@ -273,7 +275,7 @@ public enum P384r1 {
 
         public init(random: Bool = true) {
             if random {
-                self = try! Self(x963: try! Self.randomSecKey(size: 384).data)
+                self = try! Self(size: 384)
             }
         }
         /* JAVA 8 secp384r1:
@@ -343,7 +345,7 @@ public enum P521r1 {
 
         public init(random: Bool = true) {
             if random {
-                self = try! Self(x963: try! Self.randomSecKey(size: 521).data)
+                self = try! Self(size: 521)
             }
         }
         /* JAVA 8 secp521r1:
@@ -381,15 +383,5 @@ public enum P521r1 {
             0x03, 0x81, 0x86, // BITSTRING[134]
             0x00 // EOC
         ])
-    }
-}
-
-extension SecKey {
-
-    var data: Data {
-        var error: Unmanaged<CFError>?
-        let data: Data! = SecKeyCopyExternalRepresentation(self, &error) as Data?
-//        print(data as! CFData)
-        return data
     }
 }
