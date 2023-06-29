@@ -14,8 +14,8 @@ let package = Package(
         .target(
             name: "EcKeysKit",
             path: "Sources"),
-//        .testTarget(
-//            name: "EcKeysKitTests",
-//            dependencies: ["EcKeysKit"]),
+        .testTarget(
+            name: "EcKeysKitTests",
+            dependencies: ["EcKeysKit"]),
     ]
 )
