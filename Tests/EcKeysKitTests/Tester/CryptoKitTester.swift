@@ -7,20 +7,28 @@ protocol CryptoKitPublicKey {
     var rawRepresentation: Data { get }
 }
 
+@available(iOS 14.0, *)
 extension P256.KeyAgreement.PublicKey: CryptoKitPublicKey {}
+@available(iOS 14.0, *)
 extension P384.KeyAgreement.PublicKey: CryptoKitPublicKey {}
+@available(iOS 14.0, *)
 extension P521.KeyAgreement.PublicKey: CryptoKitPublicKey {}
 
+@available(iOS 14.0, *)
 protocol CryptoKitPrivateKey: CryptoKitPublicKey {
     associatedtype PublicKey: CryptoKitPublicKey
     var publicKey: PublicKey { get }
     func sharedSecretFromKeyAgreement(with publicKeyShare: PublicKey) throws -> SharedSecret
 }
 
+@available(iOS 14.0, *)
 extension P256.KeyAgreement.PrivateKey: CryptoKitPrivateKey {}
+@available(iOS 14.0, *)
 extension P384.KeyAgreement.PrivateKey: CryptoKitPrivateKey {}
+@available(iOS 14.0, *)
 extension P521.KeyAgreement.PrivateKey: CryptoKitPrivateKey {}
 
+@available(iOS 14.0, *)
 struct CryptoKitTester<PrivateKey: CryptoKitPrivateKey> {
     
     let sample: Sample

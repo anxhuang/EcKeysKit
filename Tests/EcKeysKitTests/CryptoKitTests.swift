@@ -1,6 +1,7 @@
 import CryptoKit
 import XCTest
 
+@available(iOS 14.0, *)
 final class CryptoKitTests: XCTestCase {
 
     func testP256() throws {
