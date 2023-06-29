@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/anxhuang/EcKeysKit.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
+  s.swift_versions = "4.0"
 
   s.source_files = 'Sources/EcKeysKit/**/*'
   
