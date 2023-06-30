@@ -63,7 +63,7 @@
 		BD9DD80F07FD8BAB13A32556A9B25518 /* Pods-EcKeysKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EcKeysKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		BE784B6CF1FE51BECDE35D20E9B6A966 /* Pods-EcKeysKit_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-EcKeysKit_Tests"; path = Pods_EcKeysKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C057EED98A4596A1B1C27A20B6361CAD /* Pods-EcKeysKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EcKeysKit_Tests.modulemap"; sourceTree = "<group>"; };
-		CE31CF572A4DE0EE0001C4EF /* EcKeysKit-Objc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EcKeysKit-Objc.swift"; sourceTree = "<group>"; };
+		CE31CF572A4DE0EE0001C4EF /* EcKeysKit-Objc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "EcKeysKit-Objc.swift"; path = "Sources/EcKeysKit/EcKeysKit-Objc.swift"; sourceTree = "<group>"; };
 		CED45FF12A4D32B2006C44C0 /* EcKeysKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EcKeysKit.swift; path = Sources/EcKeysKit/EcKeysKit.swift; sourceTree = "<group>"; };
 		D17BAF3B9C041BF0B56EB8660D7AB1BF /* EcKeysKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EcKeysKit-dummy.m"; sourceTree = "<group>"; };
 		DDAE13FB01B5FEF6F0EF4633BE15C626 /* EcKeysKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EcKeysKit.debug.xcconfig; sourceTree = "<group>"; };
